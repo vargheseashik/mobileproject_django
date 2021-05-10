@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<title>My Orders</title>
+{%extends 'mobile/base.html'%}
+{%block body_block%}
+<table class="table" style="color:white">
+    <tr>
+        <td></td>
+        <td>Product</td>
+        <td>Price</td>
+        <td>Specificaton</td>
+        <td>Status</td>
+    </tr>
+    {%for orders in order%}
+    <tr>
+        <td>
+            <div class="image"><img src="{{orders.product.image.url}}" class="card-img-top" alt="..."></div>
+        </td>
+        <td>{{orders.product}}</td>
+        <td>{{orders.product.price}}</td>
+        <td>{{orders.product.specs}}</td>
+        <td>{{orders.status}}</td>
+        <td><a href="{%url 'cancelorder' orders.id%}">Cancel Order</a></td>
+    </tr>
+    {%endfor%}
+</table>
+{%endblock%}

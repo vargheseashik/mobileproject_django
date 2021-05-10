@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'mobile/index.html'%}
+{%block body_block%}
+<div class="row">
+    <table class="table">
+        <tr>
+            <td>Product name</td>
+            <td>Price</td>
+            <td>Spec</td>
+        </tr>
+
+    {%for mobile in mobiles%}
+        <tr>
+            <td>{{mobile.product_name}}</td>
+            <td>{{mobile.price}}</td>
+            <td>{{mobile.specs}}</td>
+            <td>  <a href="{%url 'adminmobdetails' mobile.id%}" class="btn btn-primary">View</a></td>
+            <td><a href="{%url 'update' mobile.id%}">Update</a></td>
+            <td><a href="{%url 'delete' mobile.id%}">Delete</a></td>
+        </tr>
+
+
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}
