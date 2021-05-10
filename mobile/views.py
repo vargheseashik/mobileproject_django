@@ -190,4 +190,17 @@ def remove_cart_item(request,id):
     return redirect('listmobile')
 
 #to buy from cart
-
+def cart_order(request,id):
+    carts=Cart.objects.get(id=id)
+    form=OrderForm(initial={'user':request.user,'product':carts.product})
+    context={}
+    context['form']=form
+    if request.method=='POST':
+        form=OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listmobile')
+        else:
+            context['form']=form
+            return render(request,'mobile/ordereditems.html',context)
+    return render(request, 'mobile/ordereditems.html', context)
