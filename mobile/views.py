@@ -199,7 +199,8 @@ def cart_order(request,id):
         form=OrderForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('listmobile')
+            remove_cart_item(request,id)
+            return redirect('mycart')
         else:
             context['form']=form
             return render(request,'mobile/ordereditems.html',context)
