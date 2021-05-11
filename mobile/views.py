@@ -3,6 +3,7 @@ from .models import Product,Orders,Cart
 from .forms import CreateProductForm,UserRegisterationForm,LoginForm,OrderForm,CartForm
 from django.contrib.auth import authenticate,login,logout
 from .decorators import user_login,admin_only
+from django.db.models import Sum
 # from .authentication import EmailAuthenticateBackend
 
 @admin_only
@@ -179,9 +180,10 @@ def add_to_cart(request,id):
 # to view my cart
 def view_mycart(request):
     carts=Cart.objects.filter(user=request.user)
-    context={}
-    context['carts']=carts
-    return render(request,'mobile/cartview.html',context)
+    # context={}
+    # context['carts']=carts
+    total=Cart.objects.filter(user=request.user).aggregate(Sum('price_total'))
+    return render(request,'mobile/cartview.html', {'carts':carts,'total':total})
 
 #to remove from cart
 def remove_cart_item(request,id):
@@ -205,3 +207,23 @@ def cart_order(request,id):
             context['form']=form
             return render(request,'mobile/ordereditems.html',context)
     return render(request, 'mobile/ordereditems.html', context)
+
+@user_login
+def admin_view_order(request):
+    orders=Orders.objects.all()
+    context={}
+    context["orders"]=orders
+    return render(request,"mobile/orderadmin.html",context)
+
+@user_login
+def order_delivered(request,id):
+    order=Orders.objects.get(id=id)
+    order.status='Delivered'
+    order.save()
+    return redirect("adminorder")
+@user_login
+def order_shipped(request,id):
+    order=Orders.objects.get(id=id)
+    order.status='Shipped'
+    order.save()
+    return redirect("adminorder")

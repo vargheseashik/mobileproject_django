@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from .views import index,base,listmobile,add_product,mobile_details,update_mobile,delete_mobile,\
     registeration,signin,signout,item_order,view_myorder,cancel_order,adminmobile,admin_mobile_details,\
-    add_to_cart,view_mycart,remove_cart_item,cart_order
+    add_to_cart,view_mycart,remove_cart_item,cart_order,admin_view_order,order_shipped,order_delivered
 
 
 
@@ -41,5 +41,8 @@ urlpatterns = [
     path('mycart',view_mycart,name='mycart'),
     path('remove/<int:id>',remove_cart_item,name='remove'),
     path('ordercart/<int:id>', cart_order, name='cart_order'),
+    path('adminorder', admin_view_order, name='adminorder'),
+    path('delivered/<int:id>', order_delivered, name='delivered'),
+    path('shipped/<int:id>', order_shipped, name='shipped'),
 
 ]

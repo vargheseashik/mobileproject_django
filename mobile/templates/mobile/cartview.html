@@ -23,11 +23,15 @@
         <td>{{cart.price_total}}</td>
         <td><a href="{%url 'remove' cart.id%}">Remove</a></td>
         <td><a href="{%url 'cart_order' cart.id%}" class="btn btn-primary">Place Order</a></td>
-
-
-
-
     </tr>
     {%endfor%}
+</table>
+<table class="table" style="color:white;font-size:24px;font-weight:500;">
+    <tr>
+        <td>Cart Total: ₹{{total.price_total__sum}}</td>
+    </tr>
+    <tr>
+        <td><a href="#" class="btn btn-success">Proceed to Buy</a></td>
+    </tr>
 </table>
 {%endblock%}
