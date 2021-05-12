@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<title>My Orders</title>
+{%extends 'user/index.html'%}
+{%block tmp%}
+<table class="table table-dark" style="color:white"" >
+    <tr>
+        <td></td>
+        <td>Product</td>
+        <td>Price</td>
+        <td>Specificaton</td>
+        <td>Status</td>
+        <td>Address</td>
+    </tr>
+    {%for orders in order%}
+    <tr>
+        <td>
+            <div class="image"><img src="{{orders.product.image.url}}" class="card-img-top" alt="..."></div>
+        </td>
+        <td>{{orders.product}}</td>
+        <td>{{orders.product.price}}</td>
+        <td>{{orders.product.specs}}</td>
+        <td>{{orders.status}}</td>
+        <td>{{orders.address}}</td>
+        {%if not orders.status == "Cancelled"%}
+        <td><a href="{%url 'cancelorders' orders.id%}">Cancel Order</a></td>
+        {%endif%}
+    </tr>
+    {%endfor%}
+</table>
+{%endblock%}

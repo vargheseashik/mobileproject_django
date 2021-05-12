@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "administrator/index.html" %}
+      {% block tmp %}
+<div class="card-body">
+    <h5 class="card-title"><b>MOBILES</b></h5>
+      <div class="container text-center">
+    <p class="card-text">
+                <table class="table table-light">
+
+                   <tr>
+                       <td><b>Model Name</b></td>
+                       <td><b>Manufacturer</b></td>
+                       <td><b>Price</b></td>
+                       <td><b>Stock</b></td>
+                       <td><b>Specs</b></td>
+                        <td><b>View</b></td>
+                       <td><b>Update</b></td>
+                       <td><b>Delete</b></td>
+                   </tr>
+                   <!--django template language-->
+                   {%for i in mobiles %}
+                   <tr>
+                       <td>{{i.model_name}}</td>
+                       <td>{{i.manufacturer}}</td>
+                       <td>{{i.price}}</td>
+                       <td>{{i.stock}}</td>
+                       <td>{{i.specs}}</td>
+                        <td><b><a href="{%url 'mobiledetails' i.id %}" class="btn btn-success">View</a></b></td>
+                       <td><b><a href="{%url 'updatemobile' i.id %}" class="btn btn-primary">Update</a></b></td>
+                       <td><b><a href="{%url 'deletemobile' i.id %}" class="btn btn-danger" onClick="return confirm('Are you sure too delete this book ?');">Delete</a></b></td>
+
+
+
+                   </tr>
+                   {% endfor %}
+               </table>
+    </p>
+</div>
+  </div>
+                    {% endblock %}

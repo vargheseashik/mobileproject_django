@@ -14,12 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+from .views import home,list_all_mobiles,create_mobile,admin_login,admin_logout,mobile_details,delete_mobile,update_mobile
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('user.urls')),
-    path('administrator/', include('administrator.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+   path('home/',home,name="home"),
+   path('list/',list_all_mobiles,name="list"),
+   path('create/',create_mobile,name="create"),
+   path('login',admin_login,name="login"),
+   path('logout',admin_logout,name="logout"),
+   path('mobiledetails/<int:id>',mobile_details,name="mobiledetails"),
+    path('deletemobile/<int:id>',delete_mobile,name="deletemobile"),
+    path('updatemobile/<int:id>',update_mobile,name="updatemobile"),
+]

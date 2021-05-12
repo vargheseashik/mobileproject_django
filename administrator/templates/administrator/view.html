@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "administrator/index.html" %}
+      {% block tmp %}
+  <div class="card-body">
+
+
+    <p class="card-text">
+      <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 18rem;">
+          <img src="{{mobile.image.url}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">MOBILE DETAILS</h5>
+
+    <p class="card-text">Model Name - {{mobile.model_name}}<br>Manufacturer - {{mobile.manufacturer}}<br><br>Specification - {{mobile.specs}}<br>Stock Left - {{mobile.stock}} Nos.<br>price - Rs.{{mobile.price}}</p>
+
+  </div></div>
+                    {% endblock %}
