@@ -2,6 +2,7 @@
 <title>My Orders</title>
 {%extends 'user/index.html'%}
 {%block tmp%}
+{% if orders%}
 <table class="table table-dark" style="color:white"" >
     <tr>
         <td></td>
@@ -27,4 +28,8 @@
     </tr>
     {%endfor%}
 </table>
+{%else %}
+<h3>NO ORDERS!</h3>
+{% endif %}
+
 {%endblock%}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'user/index.html' %}
+{% block tmp %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div >
+                <h2>Orders</h2>
+<table class="table table-dark" style="color:white"" >
+    <tr>
+        <td></td>
+        <td>User</td>
+        <td>Address</td>
+        <td>Product Name</td>
+        <td>Price</td>
+        <td>Status</td>
+    </tr>
+
+    {% for order in orders%}
+    <tr>
+        <td style="width:10%;height:10%;"><img src="{{order.product.image.url}}" class="card-img-top" alt="..."></td>
+        <td>{{order.user}}</td>
+        <td>{{order.address}}</td>
+        <td>{{order.product}}</td>
+        <td>{{order.product.price}}</td>
+        <td>{{order.status}}</td>
+        <td><a href="{%url 'delivered' order.id%}" class="btn btn-block btn-success">Delivered</a></td>
+        <td><a href="{%url 'shipped' order.id%}" class="btn btn-block btn-warning">Shipped</a></td>
+    </tr>
+    {%endfor%}
+</table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

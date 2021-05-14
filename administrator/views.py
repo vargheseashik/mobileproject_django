@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import MobileCreateForm
 from .models import Mobile
 from django.contrib.auth import authenticate,login,logout
+from user.models import *
 # Create your views here.
 def home(request):
     if request.user.is_superuser:
@@ -79,3 +80,33 @@ def update_mobile(request,id):
         return render(request, "administrator/update.html", context)
     else:
         return redirect("logout")
+
+
+def admin_view_order(request):
+    if request.user.is_superuser:
+        orders=Orders.objects.all()
+        context={}
+        context["orders"]=orders
+        return render(request,"administrator/orderadmin.html",context)
+    else:
+        return redirect("logout")
+
+def order_delivered(request,id):
+    if request.user.is_superuser:
+        order=Orders.objects.get(id=id)
+        order.status='Delivered'
+        order.save()
+        return redirect("adminorder")
+    else:
+        return redirect("logout")
+
+
+def order_shipped(request,id):
+    if request.user.is_superuser:
+        order=Orders.objects.get(id=id)
+        order.status='Shipped'
+        order.save()
+        return redirect("adminorder")
+    else:
+        return redirect("logout")
+

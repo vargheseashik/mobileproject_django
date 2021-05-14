@@ -2,6 +2,7 @@
 <title>My Orders</title>
 {%extends 'user/index.html'%}
 {%block tmp %}
+{%if carts%}
 <table class="table table-dark" style="color:white">
     <tr>
         <td style="width:20%;">Image</tdstyle>
@@ -25,13 +26,17 @@
         <td><a href="{%url 'placeorder' cart.id%}" class="btn btn-primary">Place Order</a></td>
     </tr>
     {%endfor%}
+        <td><a href="#" class="btn btn-success">Proceed to Buy</a></td>
+
 </table>
 <table class="table table-dark text-light">
     <tr>
         <td style="text-align:right;background-color:white;color:black;">Cart Total: <b>₹{{total.price_total__sum}}</b></td>
     </tr>
-    <tr>
-        <td><a href="#" class="btn btn-success">Proceed to Buy</a></td>
-    </tr>
+    <tr></tr>
 </table>
+{%else %}
+<h3>CART EMPTY!</h3>
+{% endif %}
+
 {%endblock%}
